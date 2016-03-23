@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="page-header">
+    <h2>Заполните регистационные данные</h2>
+  </div>
+</div>
+
+<div class="row well">
+  <div class="col-lg-6 col-lg-offset-2">
+    <div class="row">
+        <form class="form-horizontal" name="signUpForm" novalidate>
+          <fieldset>
+            <!--<div class="form-group" ng-class="{ 'has-error': signUpForm.email.$error.email }">
+                <label for="email" class="col-lg-3 control-label">Email</label>
+                <div class="col-lg-9">
+                    <input type="email" name="email" class="form-control" id="email" ng-model="signUpData.email" autofocus required>
+                    <p ng-show="signUpForm.email.$error.email" class="help-block">Введите правильный email</p>
+                </div>
+            </div> -->
+            <div class="form-group" ng-class="{ 'has-error': signUpForm.email.$error.pattern || signUpForm.email.$error.emailexist  ||
+                                                            (signUpForm.email.$error.required && signUpForm.email.$touched) }">
+                <label for="email" class="col-lg-3 control-label">Email</label>
+                <div class="col-lg-9">
+                    <input type="email" name="email" ng-model-options="{ updateOn: 'blur' }" ng-pattern="regex.email"
+                           class="form-control" id="email" ng-model="signUpData.email" placeholder="mymail@gmail.com" autofocus required>
+                    <p ng-show="signUpForm.email.$error.pattern" class="help-block">Введите правильный email</p>
+                    <p ng-show="signUpForm.email.$error.emailexist" class="help-block">Такой email уже существует</p>
+                    <p ng-show="signUpForm.email.$error.required && signUpForm.email.$touched" class="help-block">Заполните email</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': signUpForm.password.$error.required && signUpForm.password.$touched }">
+                <label for="password" class="col-lg-3 control-label">Пароль</label>
+                <div class="col-lg-9">
+                    <input type="password" name="password" ng-model-options="{ updateOn: 'blur' }"
+                           class="form-control" id="password" ng-model="signUpData.password" required>
+                    <p ng-show="signUpForm.password.$error.required && signUpForm.password.$touched" class="help-block">Заполните пароль</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': noEqualsPasswordsError || (signUpForm.confirmPassword.$error.required && signUpForm.confirmPassword.$touched) }">
+                <label for="confirmPassword" class="col-lg-3 control-label">Повторите пароль</label>
+                <div class="col-lg-9">
+                    <input type="password" name="confirmPassword" ng-model-options="{ updateOn: 'blur' }"
+                           class="form-control" id="confirmPassword" ng-model="signUpData.confirmPassword" required>
+                    <p ng-show="noEqualsPasswordsError" class="help-block">Пароли не совпадают </p>
+                    <p ng-show="signUpForm.confirmPassword.$error.required && signUpForm.confirmPassword.$touched" class="help-block">Заполните пароль</p>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error': signUpForm.lastName.$error.pattern || (signUpForm.lastName.$error.required && signUpForm.lastName.$touched) }">
+                <label for="lastName" class="col-lg-3 control-label">Фамилия</label>
+                <div class="col-lg-9">
+                    <input type="text" name="lastName" ng-model-options="{ updateOn: 'blur' }" ng-pattern="regex.lastName"
+                           class="form-control" id="lastName" ng-model="signUpData.lastName" placeholder="Иванов" required>
+                    <p ng-show="signUpForm.lastName.$error.pattern" class="help-block">Фамилия должна состоять из букв!</p>
+                    <p ng-show="signUpForm.lastName.$error.required && signUpForm.lastName.$touched" class="help-block">Введите фамилию</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': signUpForm.firstName.$error.pattern || (signUpForm.firstName.$error.required && signUpForm.firstName.$touched) }">
+                <label for="firstName" class="col-lg-3 control-label">Имя</label>
+                <div class="col-lg-9">
+                    <input type="text" name="firstName" ng-model-options="{ updateOn: 'blur' }" ng-pattern="regex.firstName"
+                           class="form-control" id="firstName" ng-model="signUpData.firstName" placeholder="Иван" required>
+                    <p ng-show="signUpForm.firstName.$error.pattern" class="help-block">Имя должно состоять из букв!</p>
+                    <p ng-show="signUpForm.firstName.$error.required && signUpForm.firstName.$touched" class="help-block">Введите имя</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': signUpForm.dob.$error.pattern || (signUpForm.dob.$error.required && signUpForm.dob.$touched)  }">
+                <label for="dob" class="col-lg-3 control-label">Дата рождения</label>
+                <div class="col-lg-9">
+                    <input type="text" name="dob" ng-model-options="{ updateOn: 'blur' }" ng-pattern="regex.dob"
+                           class="form-control" id="dob" ng-model="signUpData.dob" placeholder="12.01.2000" required>
+                    <p ng-show="signUpForm.dob.$error.pattern" class="help-block">Неверный формат даты</p>
+                    <p ng-show="signUpForm.dob.$error.required && signUpForm.dob.$touched" class="help-block">Введите дату</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-8 col-lg-offset-4">
+                    <button type="submit" ng-click="register(signUpData, signUpForm)" class="btn btn-info">Сохранить</button>
+                    <button type="reset" ng-click="redirectToMainPage()" class="btn btn-default">На главную</button>
+                </div>
+            </div>
+          </fieldset>
+        </form>
+    </div>
+  </div>
+</div>
