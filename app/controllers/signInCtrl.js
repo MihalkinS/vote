@@ -14,7 +14,7 @@ appVote.controller('signInCtrl', ['$scope', '$location', 'authService', function
   $scope.signIn = function(signInData, signInForm){
 
           authService.signIn(signInData).then(function(result){
-
+            
               if(result === "error"){
                 signInForm.email.$setValidity("error", false);
                 return;

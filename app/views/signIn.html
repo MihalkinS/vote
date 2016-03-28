@@ -23,7 +23,7 @@
                 <div class="form-group" ng-class="{ 'has-error': signInForm.password.$error.required && signInForm.password.$touched }">
                     <label for="password" class="col-lg-3 control-label">Пароль</label>
                     <div class="col-lg-9">
-                        <input type="password" name="password" ng-model-options="{ updateOn: 'blur' }"
+                        <input type="password" name="password"
                                class="form-control" id="password" ng-model="signInData.password" required>
                         <p ng-show="signInForm.password.$error.required && signInForm.password.$touched" class="help-block">Заполните пароль</p>
                     </div>

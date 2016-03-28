@@ -26,8 +26,6 @@ appVote.factory('voteService', ['$http', '$q', 'localStorageService', 'Server', 
     $http.post("/endpoints/results.php", mapID)
     .success(function (response) {
         deferred.resolve(response);
-        console.log("____________");
-        console.log(response);
     })
         .error(function (err, status) {
         deferred.reject(err);
@@ -99,7 +97,6 @@ appVote.factory('voteService', ['$http', '$q', 'localStorageService', 'Server', 
 
       $http.get("/endpoints/getVotedHumans.php")
       .success(function (response) {
-        console.log(response);
           deferred.resolve(response);
       })
           .error(function (err, status) {
@@ -132,8 +129,6 @@ appVote.factory('voteService', ['$http', '$q', 'localStorageService', 'Server', 
 
       $http.post("/endpoints/getMapInfo.php", mapID)
       .success(function (response) {
-          console.log("---------------");
-          console.log(response);
           deferred.resolve(response);
       })
           .error(function (err, status) {

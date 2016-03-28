@@ -57,8 +57,6 @@ appVote.factory('authService', ['$http', '$q', 'localStorageService', 'Server', 
 
             var deferred = $q.defer();
 
-            console.log(loginData)
-
             $http.post('/endpoints/signIn.php', loginData)
                 .success(function (response) {
                   if(response != "error" ){
@@ -66,9 +64,10 @@ appVote.factory('authService', ['$http', '$q', 'localStorageService', 'Server', 
                     _auth.isAuth = true;
                     _auth.email = response.email;
                     _auth.id = response.id;
+                    deferred.resolve(response);
                   };
 
-                    deferred.resolve(response);
+                    deferred.reject(response);
 
                 })
                 .error(function (err, status) {
