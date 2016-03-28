@@ -35,6 +35,22 @@ appVote.factory('voteService', ['$http', '$q', 'localStorageService', 'Server', 
 
   };
 
+  var _getResultsByMapOrderByGroups = function (mapID) {
+
+    var deferred = $q.defer();
+
+    $http.post("/endpoints/resultsOrderByGroups.php", mapID)
+    .success(function (response) {
+        deferred.resolve(response);
+    })
+        .error(function (err, status) {
+        deferred.reject(err);
+    });
+
+    return deferred.promise;
+
+  };
+
   var _vote = function (voteData) {
 
       var deferred = $q.defer();

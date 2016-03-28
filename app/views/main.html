@@ -15,45 +15,10 @@
 	<div class="col-lg-8 col-lg-offset-2">
 						<div class="list-group" ng-repeat='competition in competitions.slice().reverse()'>
 								<a href="#/vote/{{competition.id}}/{{auth.id}}" class="list-group-item">
-									<h4 class="list-group-item-heading"><strong>{{competition.date}}</strong> {{competition.name}}. {{competition.kind}}</h4>
+									<h4 class="list-group-item-heading"><strong>{{competition.date}}</strong> {{competition.name}}(<em>{{competition.kind}}</em>)</h4>
 									<p class="list-group-item-text">{{competition.text}}</p><br/>
-									<p>Проголосовало {{votedCountMass[competition.id]}} из {{allCountOfHumans}} человек</p>
-									<div class="progress progress-striped">
-										<div class="progress-bar progress-bar-danger" style="width: {{votedCountMass[competition.id] / allCountOfHumans * 100}}%"></div>
-									</div>
+									<p class="text-right">Проголосовало людей: <strong>{{votedCountMass[competition.id]}}</strong></p>
 								</a>
 					 </div>
 	</div>
 </div>
-<!--
-<div class="row">
-	<div class="col-lg-8 col-lg-offset-2">
-						<div class="list-group">
-								<a href="#/vote/3/1" class="list-group-item">
-									<h4 class="list-group-item-heading"><strong>27.03.2016</strong> Бресткий Подснежник. Спринт</h4>
-									<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p><br/>
-									<p>Проголосовало 10 из 20 человек</p>
-									<div class="progress progress-striped">
-										<div class="progress-bar progress-bar-danger" style="width: 50%"></div>
-									</div>
-								</a>
-								<a href="#/vote/2/1" class="list-group-item">
-									<h4 class="list-group-item-heading"><strong>26.03.2016</strong> Бресткий Подснежник. Классика</h4>
-									<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p><br/>
-									<p>Проголосовало 2 из 20 человек</p>
-									<div class="progress progress-striped">
-  									<div class="progress-bar progress-bar-danger" style="width: 10%"></div>
-									</div>
-								</a>
-								<a href="#/vote/1/1" class="list-group-item">
-									<h4 class="list-group-item-heading"><strong>25.03.2016</strong> Бресткий Подснежник. Средняя</h4>
-									<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p><br/>
-									<p>Проголосовало 16 из 20 человек</p>
-									<div class="progress progress-striped">
-										<div class="progress-bar progress-bar-danger" style="width: 80%"></div>
-									</div>
-								</a>
-					 </div>
-	</div>
-</div>
--->

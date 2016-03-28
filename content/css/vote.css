@@ -1,3 +1,10 @@
 .table th, td {
    text-align: center;
 }
+
+.backOrange {
+  padding: 3px;
+  border-radius: 1px;
+  background-color: #f69c55;
+  color: white;
+}

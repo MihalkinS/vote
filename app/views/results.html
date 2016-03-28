@@ -7,40 +7,216 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-6">
-      <table class="table table-striped table-hover">
-        <thead>
-            <th><small>Группа</small></th>
-            <th><small>Информация о соревнованиях</small></th>
-            <th><small>Местность</small></th>
-            <th><small>Карта</small></th>
-            <th><small>Печать</small></th>
-            <th><small>Герметизация карты</small></th>
-            <th><small>Дистанция</small></th>
-            <th><small>Старт</small></th>
-            <th><small>Финиш</small></th>
-            <th><small>Результаты</small></th>
-            <th><small>Центр соревнований</small></th>
-            <th><small>Количество голосов</small></th>
-            <th><small>Средний балл</small></th>
-        </thead>
-        <tbody>
-          <tr ng-repeat="group in results">
-            <td>{{ group.name}}</td>
-            <td>{{ (group.info / group.count).toFixed(2) }}</td>
-            <td>{{ (group.place / group.count).toFixed(2) }}</td>
-            <td>{{ (group.map / group.count).toFixed(2) }}</td>
-            <td>{{ (group.print / group.count).toFixed(2) }}</td>
-            <td>{{ (group.sealed / group.count).toFixed(2) }}</td>
-            <td>{{ (group.distance / group.count).toFixed(2) }}</td>
-            <td>{{ (group.start / group.count).toFixed(2) }}</td>
-            <td>{{ (group.finish / group.count).toFixed(2) }}</td>
-            <td>{{ (group.results / group.count).toFixed(2) }}</td>
-            <td>{{ (group.center / group.count).toFixed(2) }}</td>
-            <td>{{ group.count }}</td>
-            <td>{{ ( ((group.info / group.count) + (group.place / group.count) + (group.map / group.count) + (group.print / group.count) + (group.sealed / group.count) + (group.distance / group.count) + (group.start / group.count) + (group.finish / group.count) + (group.results / group.count) + (group.center / group.count)) / 10).toFixed(2) }}</td>
-          <tr>
-        </tbody>
-      </table>
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h2>Общий средний балл : <strong>{{ ((results.young.middle + results.adults.middle + results.old.middle) / 3).toFixed(2) }}</strong></h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-3">
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <strong>МЖ10-20</strong>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.young.count != 0"><small>{{ (results.young.info / results.young.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.young.count == 0"><small>0</small></span>
+                    <small>Информация о соревнованиях</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.young.count != 0"><small>{{ (results.old.place / results.old.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.young.count == 0"><small>0</small></span>
+                    <small>Местность</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.young.count != 0"><small>{{ (results.young.map / results.young.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.young.count == 0"><small>0</small></span>
+                    <small>Карта</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.young.count != 0"><small>{{ (results.young.print / results.young.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.young.count == 0"><small>0</small></span>
+                    <small>Печать</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.young.count != 0"><small>{{ (results.young.sealed / results.young.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.young.count == 0"><small>0</small></span>
+                    <small>Герметизация карты</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.young.count != 0"><small>{{ (results.young.distance / results.young.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.young.count == 0"><small>0</small></span>
+                    <small>Дистанция</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.young.count != 0"><small>{{ (results.young.start / results.young.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.young.count == 0"><small>0</small></span>
+                    <small>Старт</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.young.count != 0"><small>{{ (results.young.finish / results.young.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.young.count == 0"><small>0</small></span>
+                    <small>Финиш</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.young.count != 0"><small>{{ (results.young.results / results.young.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.young.count == 0"><small>0</small></span>
+                    <small>Результаты</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.young.count != 0"><small>{{ (results.young.center / results.young.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.young.count == 0"><small>0</small></span>
+                    <small>Центр соревнований</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.young.count != 0"><small>{{ results.young.count }}</small></span>
+                    <span class="badge" ng-show="results.young.count == 0"><small>0</small></span>
+                    <small>Количество голосов</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.young.count != 0"><small>{{ (results.young.middle).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.young.count == 0"><small>0</small></span>
+                    <small>Средний балл</small>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-3">
+                <ul class="list-group">
+                  <li class="list-group-item">
+                      <strong>МЖ21Е(А, В)</strong>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.adults.count != 0"><small>{{ (results.adults.info / results.adults.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.adults.count == 0"><small>0</small></span>
+                    <small>Информация о соревнованиях</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.adults.count != 0"><small>{{ (results.adults.place / results.adults.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.adults.count == 0"><small>0</small></span>
+                    <small>Местность</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.adults.count != 0"><small>{{ (results.adults.map / results.adults.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.adults.count == 0"><small>0</small></span>
+                    <small>Карта</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.adults.count != 0"><small>{{ (results.adults.print / results.adults.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.adults.count == 0"><small>0</small></span>
+                    <small>Печать</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.adults.count != 0"><small>{{ (results.adults.sealed / results.adults.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.adults.count == 0"><small>0</small></span>
+                    <small>Герметизация карты</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.adults.count != 0"><small>{{ (results.adults.distance / results.adults.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.adults.count == 0"><small>0</small></span>
+                    <small>Дистанция</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.adults.count != 0"><small>{{ (results.adults.start / results.adults.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.adults.count == 0"><small>0</small></span>
+                    <small>Старт</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.adults.count != 0"><small>{{ (results.adults.finish / results.adults.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.adults.count == 0"><small>0</small></span>
+                    <small>Финиш</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.adults.count != 0"><small>{{ (results.adults.results / results.adults.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.adults.count == 0"><small>0</small></span>
+                    <small>Результаты</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.adults.count != 0"><small>{{ (results.adults.center / results.adults.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.adults.count == 0"><small>0</small></span>
+                    <small>Центр соревнований</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.adults.count != 0"><small>{{ results.adults.count }}</small></span>
+                    <span class="badge" ng-show="results.adults.count == 0"><small>0</small></span>
+                    <small>Количество голосов</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.adults.count != 0"><small>{{ (results.adults.middle).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.adults.count == 0"><small>0</small></span>
+                    <small>Средний балл</small>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-3">
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <strong>МЖ35-70</strong>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.old.count != 0"><small>{{ (results.old.info / results.old.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.old.count == 0"><small>0</small></span>
+                    <small>Информация о соревнованиях</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.old.count != 0"><small>{{ (results.old.place / results.old.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.old.count == 0"><small>0</small></span>
+                    <small>Местность</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.old.count != 0"><small>{{ (results.old.map / results.old.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.old.count == 0"><small>0</small></span>
+                    <small>Карта</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.old.count != 0"><small>{{ (results.old.print / results.old.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.old.count == 0"><small>0</small></span>
+                    <small>Печать</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.old.count != 0"><small>{{ (results.old.sealed / results.old.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.old.count == 0"><small>0</small></span>
+                    <small>Герметизация карты</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.old.count != 0"><small>{{ (results.old.distance / results.old.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.old.count == 0"><small>0</small></span>
+                    <small>Дистанция</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.old.count != 0"><small>{{ (results.old.start / results.old.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.old.count == 0"><small>0</small></span>
+                    <small>Старт</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.old.count != 0"><small>{{ (results.old.finish / results.old.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.old.count == 0"><small>0</small></span>
+                    <small>Финиш</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.old.count != 0"><small>{{ (results.old.results / results.old.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.old.count == 0"><small>0</small></span>
+                    <small>Результаты</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.old.count != 0"><small>{{ (results.old.center / results.old.count).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.old.count == 0"><small>0</small></span>
+                    <small>Центр соревнований</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.old.count != 0"><small>{{ results.old.count }}</small></span>
+                    <span class="badge" ng-show="results.old.count == 0"><small>0</small></span>
+                    <small>Количество голосов</small>
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge" ng-show="results.old.count != 0"><small>{{ (results.old.middle).toFixed(2) }}</small></span>
+                    <span class="badge" ng-show="results.old.count == 0"><small>0</small></span>
+                    <small>Средний балл</small>
+                  </li>
+                </ul>
+              </div>
+            </div>
     </div>
   </div>
