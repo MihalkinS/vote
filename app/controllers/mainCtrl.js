@@ -1,4 +1,4 @@
-appVote.controller('mainCtrl', ['$scope', '$location', 'authService', 'voteService', function ($scope, $location, authService, voteService) {
+appVote.controller('mainCtrl', ['$scope', '$location', '$window', 'authService', 'voteService', function ($scope, $location, $window, authService, voteService) {
 
 $scope.errorMessage = "";
 
@@ -15,6 +15,12 @@ $scope.allCountOfHumans = 0;
     $scope.votedCountMass = result;
   });
 
+
+$scope.reloadPage = function(){
+  voteService.getVotedHumans().then(function(result){
+    $scope.votedCountMass = result;
+  });
+}
 
   $scope.competitions = [];
   voteService.getCompetitions().then(function(result){
