@@ -5,8 +5,7 @@ appVote.factory('authService', ['$http', '$q', 'localStorageService', 'Server', 
 
         var _auth = {
           isAuth: false,
-          userName: '',
-          userRole: 'anonym',
+          email: '',
           id: ''
         };
 
@@ -15,8 +14,7 @@ appVote.factory('authService', ['$http', '$q', 'localStorageService', 'Server', 
             var authData = localStorageService.get('authData');
             if (authData) {
               _auth.isAuth = true;
-              _auth.userName = authData.userName;
-              _auth.userRole = authData.role;
+              _auth.email = authData.email;
               _auth.id = authData.id;
             };
 
@@ -24,12 +22,16 @@ appVote.factory('authService', ['$http', '$q', 'localStorageService', 'Server', 
 
         var _signOut = function () {
 
-            localStorageService.remove('authData');
 
-            _auth.isAuth = false;
-            _auth.userName = "";
-            _auth.userRole = 'anonym';
-            _auth.id = '';
+
+            $http.post("/endpoints/signOut.php")
+            .success(function (response) {
+              localStorageService.remove('authData');
+              _auth.isAuth = false;
+              _auth.email = "";
+              _auth.id = '';
+
+            });
 
         };
 
@@ -53,31 +55,20 @@ appVote.factory('authService', ['$http', '$q', 'localStorageService', 'Server', 
 
         var _signIn = function (loginData) {
 
-            var data = "username=" + loginData.userName + "&password=" + loginData.password + "&grant_type=password";
-
             var deferred = $q.defer();
 
-            console.log(data)
+            console.log(loginData)
 
-            $http.post(serverURL + 'token', data, {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            })
+            $http.post('/endpoints/signIn.php', loginData)
                 .success(function (response) {
+                  if(response != "error" ){
+                    localStorageService.set('authData', { token: response.token, email: response.email, id: response.id });
+                    _auth.isAuth = true;
+                    _auth.email = response.email;
+                    _auth.id = response.id;
+                  };
 
-                localStorageService.set('authData', { token: response.access_token, userName: response.userName, role: response.role, id: response.id });
-
-                _auth.isAuth = true;
-                _auth.userName = response.userName;
-                _auth.userRole = response.role;
-                _auth.id = response.id;
-
-                console.log('------');
-                console.log(response);
-                console.log('------');
-
-                deferred.resolve(response);
+                    deferred.resolve(response);
 
                 })
                 .error(function (err, status) {
@@ -95,6 +86,7 @@ appVote.factory('authService', ['$http', '$q', 'localStorageService', 'Server', 
         authReturnedObject.signIn = _signIn;
         authReturnedObject.signOut = _signOut;
         authReturnedObject.signUp = _signUp;
+        authReturnedObject.fillAuthData = _fillAuthData;
 
   return authReturnedObject;
 

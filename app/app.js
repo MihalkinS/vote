@@ -16,6 +16,37 @@ appVote.config(function($routeProvider){
        controller: 'signInCtrl'
   });
 
+  $routeProvider.when('/vote/:mapID/:userID',
+  {
+       templateUrl: 'app/views/vote.html',
+       controller: 'voteCtrl',
+       resolve: {
+
+         load: function($q, $route, $location, voteService)
+         {
+               var defer = $q.defer();
+               voteService.checkVote($route.current.params.userID, $route.current.params.mapID).then(function (result){
+                 if(result != "voteExist") {
+                   defer.resolve();
+                 }
+                 else {
+                   $location.path("/vote/" + $route.current.params.mapID)
+                   defer.reject("voteExist");
+                 }
+               });
+
+               return defer.promise;
+
+          }
+       }
+  });
+
+  $routeProvider.when('/vote/:mapID',
+  {
+       templateUrl: 'app/views/results.html',
+       controller: 'resultsCtrl'
+  });
+
   $routeProvider.when('/',
   {
        templateUrl: 'app/views/main.html'
@@ -24,3 +55,7 @@ appVote.config(function($routeProvider){
   $routeProvider.otherwise({ redirectTo: '/404' });
 
 });
+
+appVote.run(['authService', function (authService) {
+    authService.fillAuthData();
+}]);

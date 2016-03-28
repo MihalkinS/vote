@@ -8,14 +8,14 @@
     $firstName = $data->firstName;
     $dob = $data->dob;
 
-    $checkEmail = $db->query("SELECT * FROM users WHERE email='$email'");
+    $checkEmail = $db->query("SELECT * FROM voteusers WHERE email='$email'");
 	  $checkEmail = $checkEmail->fetchAll();
 
 	if (count($checkEmail) == 1) {
 		echo "emailExist";
 	}
   else {
-    $q = "INSERT INTO users (email, password, firstName, lastName, dob, token) VALUES (:email, :password, :firstName, :lastName, :dob, :token)";
+    $q = "INSERT INTO voteusers (email, password, firstName, lastName, dob, token) VALUES (:email, :password, :firstName, :lastName, :dob, :token)";
     $query = $db->prepare($q);
     $execute = $query->execute(array(
         ":email" => $email,
@@ -28,9 +28,6 @@
     echo "userAdded";
 	}
 
-
-
     //echo json_encode($username);
-
 
  ?>

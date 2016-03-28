@@ -1,22 +1,31 @@
-appVote.controller('mainCtrl', ['$scope', '$location', 'authService', function ($scope, $location, authService) {
+appVote.controller('mainCtrl', ['$scope', '$location', 'authService', 'voteService', function ($scope, $location, authService, voteService) {
 
 $scope.errorMessage = "";
 
-$scope.test = function(data){
+$scope.auth = authService.auth;
 
-    authService.signUp(data).then(function(result){
+$scope.votedCountMass = {};
+$scope.allCountOfHumans = 0;
 
-      console.log(result);
+  voteService.getAllHumans().then(function(result){
+    $scope.allCountOfHumans = result;
+  });
 
-      if(result === "ERROR") {
-        $scope.errorMessage = result;
-      }
-      else {
-        $scope.errorMessage = "";
-      };
+  voteService.getVotedHumans().then(function(result){
+    $scope.votedCountMass = result;
+  });
 
-    });
 
-};
+  $scope.competitions = [];
+  voteService.getCompetitions().then(function(result){
+    $scope.competitions = result;
+  });
+
+  $scope.signOut = function(){
+    authService.signOut();
+    $location.path('/');
+  };
+
+
 
 }]);
