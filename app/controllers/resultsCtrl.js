@@ -54,7 +54,6 @@ voteService.getMapInfo($scope.mapID).then(function(result){
 
 voteService.getResultsByMap($scope.mapID).then(function(result){
 
-      console.log(result);
 
     for (var group in result) {
 
@@ -85,10 +84,13 @@ voteService.getResultsByMap($scope.mapID).then(function(result){
       groupNumber = '';
 
     };
+        var countForTotalPoint = 0;
+
   if($scope.results["young"]["count"] != 0) {
+    countForTotalPoint = countForTotalPoint + 1;
     $scope.results["young"]["middle"] = ( parseFloat($scope.results["young"]["info"])     / parseFloat($scope.results["young"]["count"]) +
-                                          parseFloat($scope.results["young"]["place"])    / parseFloat($scope.results["young"]["count"])+
-                                          parseFloat($scope.results["young"]["map"])      / parseFloat($scope.results["young"]["count"])+
+                                          parseFloat($scope.results["young"]["place"])    / parseFloat($scope.results["young"]["count"]) +
+                                          parseFloat($scope.results["young"]["map"])      / parseFloat($scope.results["young"]["count"]) +
                                           parseFloat($scope.results["young"]["print"])    / parseFloat($scope.results["young"]["count"]) +
                                           parseFloat($scope.results["young"]["distance"]) / parseFloat($scope.results["young"]["count"]) +
                                           parseFloat($scope.results["young"]["sealed"])   / parseFloat($scope.results["young"]["count"]) +
@@ -99,6 +101,7 @@ voteService.getResultsByMap($scope.mapID).then(function(result){
     };
 
 if($scope.results["adults"]["count"] != 0) {
+    countForTotalPoint = countForTotalPoint + 1;
     $scope.results["adults"]["middle"] =  ( parseFloat($scope.results["adults"]["info"])  / parseFloat($scope.results["adults"]["count"]) +
                                          parseFloat($scope.results["adults"]["place"])    / parseFloat($scope.results["adults"]["count"]) +
                                          parseFloat($scope.results["adults"]["map"])      / parseFloat($scope.results["adults"]["count"]) +
@@ -112,6 +115,7 @@ if($scope.results["adults"]["count"] != 0) {
     };
 
 if($scope.results["old"]["count"] != 0) {
+    countForTotalPoint = countForTotalPoint + 1;
     $scope.results["old"]["middle"] =   ( parseFloat($scope.results["old"]["info"])    / parseFloat($scope.results["old"]["count"]) +
                                          parseFloat($scope.results["old"]["place"])    / parseFloat($scope.results["old"]["count"]) +
                                          parseFloat($scope.results["old"]["map"])      / parseFloat($scope.results["old"]["count"]) +
@@ -125,8 +129,8 @@ if($scope.results["old"]["count"] != 0) {
     };
 
 
-    console.log("result");
-    console.log($scope.results);
+    $scope.totalPoint = ($scope.results["young"]["middle"] + $scope.results["adults"]["middle"] + $scope.results["old"]["middle"]) / countForTotalPoint;
+
 });
 
 }]);

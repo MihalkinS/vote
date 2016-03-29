@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="page-header">
-        <h2>Общий средний балл : <strong>{{ ((results.young.middle + results.adults.middle + results.old.middle) / 3).toFixed(2) }}</strong></h2>
+        <h2>Общий средний балл : <strong>{{ (totalPoint).toFixed(2) }}</strong></h2>
       </div>
     </div>
   </div>
@@ -19,7 +19,7 @@
               <div class="col-lg-4">
                 <ul class="list-group">
                   <li class="list-group-item">
-                    <strong>МЖ10-20</strong>
+                    <strong>МЖ10-20 (Дети, юниоры, юниорки)</strong>
                   </li>
                   <li class="list-group-item">
                     <span class="badge" ng-show="results.young.count != 0"><small>{{ (results.young.info / results.young.count).toFixed(2) }}</small></span>
@@ -153,7 +153,7 @@
               <div class="col-lg-4">
                 <ul class="list-group">
                   <li class="list-group-item">
-                    <strong>МЖ35-70</strong>
+                    <strong>МЖ35-70 (Ветераны)</strong>
                   </li>
                   <li class="list-group-item">
                     <span class="badge" ng-show="results.old.count != 0"><small>{{ (results.old.info / results.old.count).toFixed(2) }}</small></span>
