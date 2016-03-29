@@ -24,8 +24,7 @@ $scope.redirectToMainPage = function() {
 };
 
 $scope.register = function(signUpData, signUpForm){
-    console.log(signUpForm);
-    console.log(signUpData);
+
     if(signUpData.password !== signUpData.confirmPassword) {
       $scope.noEqualsPasswordsError = true;
       return;
@@ -33,7 +32,8 @@ $scope.register = function(signUpData, signUpForm){
     else {
       $scope.noEqualsPasswordsError = false;
     }
-
+     signUpForm.email.$setValidity("emailexist", true);
+      if(signUpForm.$valid) {
         authService.signUp(signUpData).then(function(result){
         console.log(result);
             if(result === "emailExist"){
@@ -46,9 +46,9 @@ $scope.register = function(signUpData, signUpForm){
               $location.path("/signIn");
             };
         }, function(error){
-        alert("Произошла ошибка =(");
+        alert("Произошла ошибка");
         });
-
+    }
 
 };
 
