@@ -74,7 +74,7 @@
             </div>
             <div class="form-group">
                 <div class="col-lg-8 col-lg-offset-4">
-                    <button type="submit" ng-click="register(signUpData, signUpForm)" class="btn btn-info">Сохранить</button>
+                    <button type="submit" ng-click="register(signUpData, signUpForm)" ng-disabled="datasend == true" class="btn btn-info">Сохранить</button>
                     <button type="reset" ng-click="redirectToMainPage()" class="btn btn-default">На главную</button>
                 </div>
             </div>

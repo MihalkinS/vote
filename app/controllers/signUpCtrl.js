@@ -1,4 +1,4 @@
-appVote.controller('signUpCtrl', ['$scope', '$location', 'authService', function($scope, $location, authService){
+appVote.controller('signUpCtrl', ['$scope', '$location', "$timeout", 'authService', function($scope, $location, $timeout, authService){
 
 $scope.signUpData = {
    email: "",
@@ -9,6 +9,7 @@ $scope.signUpData = {
    dob: ""
 };
 
+
 $scope.regex = {
   email: /^[_A-z0-9]+(\.[_A-z0-9]+)*@[A-z0-9-]+(\.[A-z0-9-]+)*(\.[A-z]{2,4})$/,
   password: "^(?=.*\d)(?=.*[a-zа-яё])(?=.*[A-ZА-ЯЁ]).*$",
@@ -18,6 +19,7 @@ $scope.regex = {
 }
 
 $scope.noEqualsPasswordsError = false;
+$scope.datasend = false;
 
 $scope.redirectToMainPage = function() {
     $location.path("/");
@@ -32,12 +34,23 @@ $scope.register = function(signUpData, signUpForm){
     else {
       $scope.noEqualsPasswordsError = false;
     }
+
      signUpForm.email.$setValidity("emailexist", true);
+
+     signUpForm.email.$touched = true;
+     signUpForm.password.$touched = true;
+     signUpForm.confirmPassword.$touched = true;
+     signUpForm.firstName.$touched = true;
+     signUpForm.lastName.$touched = true;
+     signUpForm.dob.$touched = true;
+
       if(signUpForm.$valid) {
+        $scope.datasend = true;
         authService.signUp(signUpData).then(function(result){
-        console.log(result);
+
             if(result === "emailExist"){
               signUpForm.email.$setValidity("emailexist", false);
+              $scope.datasend = false;
               return;
             };
 
@@ -45,8 +58,10 @@ $scope.register = function(signUpData, signUpForm){
               signUpForm.email.$setValidity("emailexist", true);
               $location.path("/signIn");
             };
+
         }, function(error){
         alert("Произошла ошибка");
+        $scope.datasend = false;
         });
     }
 
