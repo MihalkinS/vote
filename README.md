@@ -1,2 +1,2 @@
 # vote
-Vote for the best map
+Vote for the best card in orienteering. 
