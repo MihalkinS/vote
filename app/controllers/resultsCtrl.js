@@ -2,6 +2,8 @@ appVote.controller('resultsCtrl', ['$scope', '$location', 'authService', 'voteSe
 
 $scope.mapID = $routeParams.mapID;
 
+$scope.totalPoint = 0;
+
 $scope.results2 = {};
 $scope.results = {
   young: {
@@ -128,9 +130,9 @@ if($scope.results["old"]["count"] != 0) {
                                          parseFloat($scope.results["old"]["center"])   / parseFloat($scope.results["old"]["count"]) )  / 10;
     };
 
-
-    $scope.totalPoint = ($scope.results["young"]["middle"] + $scope.results["adults"]["middle"] + $scope.results["old"]["middle"]) / countForTotalPoint;
-
+    if($scope.totalPoint !== 0) {
+      $scope.totalPoint = ( $scope.results["young"]["middle"] + $scope.results["adults"]["middle"] + $scope.results["old"]["middle"] ) / countForTotalPoint;
+    };
 });
 
 }]);
