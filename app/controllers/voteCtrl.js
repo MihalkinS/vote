@@ -36,15 +36,18 @@ voteService.getGroups().then(function(result) {
     $scope.groups = result;
   });
 
+$scope.datasend = false;
 
 $scope.vote = function(voteData, voteForm){
-    console.log(voteData);
-    if(voteForm.$valid) {
-          voteService.vote(voteData).then(function(result){
-            $location.path("/vote/" + $scope.mapID);
-          });
 
-      };
+    if(voteForm.$valid) {
+          $scope.datasend = true;
+            voteService.vote(voteData).then(function(result){
+              $location.path("/vote/" + $scope.mapID);
+            }, function(error){
+              $scope.datasend = false;
+            });
+    };
 };
 
 }]);
