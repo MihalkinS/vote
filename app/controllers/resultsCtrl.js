@@ -130,7 +130,7 @@ if($scope.results["old"]["count"] != 0) {
                                          parseFloat($scope.results["old"]["center"])   / parseFloat($scope.results["old"]["count"]) )  / 10;
     };
 
-    if($scope.totalPoint !== 0) {
+    if(($scope.results["young"]["middle"] !== 0) || ($scope.results["adults"]["middle"]) || ($scope.results["old"]["middle"])) {
       $scope.totalPoint = ( $scope.results["young"]["middle"] + $scope.results["adults"]["middle"] + $scope.results["old"]["middle"] ) / countForTotalPoint;
     };
 });
