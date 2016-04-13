@@ -2,7 +2,7 @@
 var appVote = angular.module('appVote', ["ngRoute", "LocalStorageModule"]);
 appVote.constant("Server", "http://localhost:8080");
 
-appVote.config(function($routeProvider){
+appVote.config(function($routeProvider, $locationProvider){
 
   $routeProvider.when('/signUp',
   {
@@ -47,6 +47,7 @@ appVote.config(function($routeProvider){
        controller: 'resultsCtrl'
   });
 
+
   $routeProvider.when('/',
   {
        templateUrl: 'app/views/main.html'
@@ -54,6 +55,7 @@ appVote.config(function($routeProvider){
 
   $routeProvider.otherwise({ redirectTo: '/404' });
 
+  $locationProvider.html5Mode(true);
 });
 
 appVote.run(['authService', function (authService) {

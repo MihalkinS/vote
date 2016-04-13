@@ -14,7 +14,7 @@
 <div class="row">
 	<div class="col-lg-8 col-lg-offset-2">
 						<div class="list-group" ng-repeat='competition in competitions.slice().reverse()'>
-								<a href="#/vote/{{competition.id}}/{{auth.id}}" class="list-group-item">
+								<a href="/vote/{{competition.id}}/{{auth.id}}" class="list-group-item">
 									<h4 class="list-group-item-heading"><strong>{{competition.date}}</strong> {{competition.name}}(<em>{{competition.kind}}</em>)</h4>
 									<p class="list-group-item-text">{{competition.text}}</p><br/>
 									<p class="text-right">Проголосовало людей: <strong>{{votedCountMass[competition.id]}}</strong></p>
